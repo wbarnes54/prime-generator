@@ -1,0 +1,95 @@
+<html>
+    <head><title>Primes</title></head>
+    <body>
+        <script>
+            function generatePrimes()
+            {
+                var numOfPrimes = document.getElementById("numOfPrimes").value;
+            
+                document.write("<div style=\"text-align: center\">");
+                document.write("<h1>" + numOfPrimes + " Primes</h1>");
+
+                var primes = []; //pre-generate array filled with 0's
+                for(var a=0; a<numOfPrimes; a++)
+                {
+                    primes[a] = 0;
+                }
+                
+                document.write("<style>");
+		            document.write("#numbers");
+		            document.write("{");
+		            document.write("font-family:'Courier New';");
+		            document.write("font-size:14px;");
+		            document.write("font-weight:bold;");
+                document.write("text-align:center;");
+                document.write("padding-left:10px;");
+                document.write("padding-right:10px;");
+		            document.write("}");
+		            document.write("</style>");
+
+                document.write("<div align=\"center\"><table id=\"numbers\"><tr><td>" + 2 + "</td>");
+                document.write("<td>" + 3 + "</td>");
+                document.write("<td>" + 5 + "</td>");
+
+                var num = 7;
+                var maxSquare = 2;
+                var startTime = new Date().getTime();
+            
+                primes[0] = 2; //preset these
+                primes[1] = 3; //it eliminates base case of primes[x]=0 and adding that to the primes array
+                primes[2] = 5; //this only happens for these first 3 values
+
+                for(var b=3; b<primes.length; b++) //fill each cell with a prime
+                {
+                    for(var i=1; primes[i] <= maxSquare; i++) //keep searching till nothing is divisible
+                    {
+                        if(num%primes[i]==0) 
+                        { 
+                            num+=2; //increment numbers to see if next is prime
+                            if((maxSquare+1) * (maxSquare+1) <= num) //search is limited to maxSquare < num
+                            {
+                                maxSquare++;
+                            }
+                            i = 0;
+                        }         
+                    }
+                
+                    primes[b] = num; //if loop is exited the number is prime
+                    
+                    num+=2;
+                    if((maxSquare+1) * (maxSquare+1) <= num)
+                    {
+                        maxSquare++;
+                    }
+                }
+
+                var endTime = new Date().getTime();
+                var totalCalcTime = (endTime - startTime)/1000;
+
+                startTime = new Date().getTime();
+
+                for(var a=3; a<primes.length; a++)
+                {
+                    if(a%10==0) { document.write("</tr><tr>"); }
+                    document.write("<td> " + primes[a] + " </td>");
+                }
+                
+                document.write("</tr></table></div>");
+                document.write("<p>Total Calculation Time: " + totalCalcTime + " seconds</p>");
+
+                endTime = new Date().getTime();
+                var totalPrintTime = (endTime - startTime)/1000;
+
+                document.write("<p>Total Print Time: " + totalPrintTime + " seconds</p>")
+                document.write("<input type=\"button\" value=\"Calculate Again\" onClick=\"history.go(0)\"></div>")
+            }
+        </script>
+        <form>
+            <div align="center">
+                <h1>Prime Number Generator</h1>
+                Number: <input type="text" style="width:60px" maxlength=6" id="numOfPrimes" value="100"><br />
+                <input type="button" value="Generate Primes" onClick="generatePrimes()">
+            </div>
+        </form>
+    </body>
+</html>
