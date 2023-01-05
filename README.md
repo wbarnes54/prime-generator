@@ -1,2 +1,2 @@
 # prime-generator
-Minimum square algorithm to display any number of primes
+Implemented maximimum square algorithm to display any number of primes
