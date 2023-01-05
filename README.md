@@ -1,2 +1,2 @@
 # prime-generator
-Implemented maximimum square algorithm to display any number of primes
+Maximimum square algorithm to display any number of primes. First used in Web format, then adapted to Python.
